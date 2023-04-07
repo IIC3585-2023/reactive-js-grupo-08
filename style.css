@@ -1,0 +1,150 @@
+  #game {
+    width: 500px;
+    height: 500px;
+    outline: 2px solid black;
+    position: relative;
+    background-color: rgb(197, 245, 229);
+  }
+  
+  #character {
+    width: 18px;
+    height: 18px;
+    outline: 1px solid grey;
+    background-color: yellow;
+    position: absolute;
+    top:2 px;
+    border-radius: 5px;
+    left:2px;
+    /*animation: jump 300ms */
+  }
+
+  #img{
+    /*height: 40px;
+    width: 40px;
+    */
+    display:block;
+    margin:auto;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 10px;
+  }
+  
+  
+
+
+/*   Lo de adelante no se utiliza  */
+
+
+
+
+
+
+
+  #maze {
+    width: 400px;
+    height: 400px;
+    background-image: url('imgs/jager.jpg');
+    background-size: 100%;
+  }
+  
+  #player {
+    width: 50px;
+    height: 50px;
+    background-color: red;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  * {
+    padding: 0;
+    margin: 22;
+  }
+  
+
+
+
+
+
+
+
+
+  /* new class called animate */
+  
+  .animate {
+    animation: jump 500ms;
+  }
+  
+  .right {
+    animation: right 500ms;
+  }
+  
+  #enemy {
+    width: 60px;
+    height: 60px;
+    background-color: red;
+    border-radius: 14px;
+    position: relative;
+    top: 320px;
+    left: 440px;
+    animation: moveenemy 1s infinite linear;
+  }
+  
+  @keyframes moveenemy {
+    0% {
+      left: 440px;
+    }
+    50% {
+      top: 58px;
+    }
+    100% {
+      left: 0px;
+      top: 320x;
+    }
+  }
+  
+  @keyframes jump {
+    0% {
+      top: 380px;
+    }
+    30% {
+      top: 50px;
+    }
+    50% {
+      top: 40px;
+    }
+    100% {
+      top: 380px;
+    }
+  }
+  
+  @keyframes right {
+    0% {
+      left: 0px;
+    }
+    100% {
+      left: 30px;
+    }
+  }
+  
+  
+  /* adding sky*/
+  
+  #sky {
+    width: 500px;
+    height: 340px;
+    background-color: skyblue;
+    position: absolute;
+    top: 118px;
+  }
+  
+  
+  /* adding ground */
+  
+  #ground {
+    width: 500px;
+    height: 170px;
+    background-color: bisque;
+    position: absolute;
+    top: 450px;
+  }
