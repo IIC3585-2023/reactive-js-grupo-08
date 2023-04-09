@@ -1,9 +1,8 @@
   #game {
-    width: 500px;
-    height: 500px;
-    outline: 2px solid black;
+    width: 504px;
+    height: 558px;
     position: relative;
-    background-color: rgb(197, 245, 229);
+    margin-left: 10px;
   }
   
   #character {
@@ -17,6 +16,7 @@
     left:2px;
     /*animation: jump 300ms */
   }
+
 
   #img{
     /*height: 40px;

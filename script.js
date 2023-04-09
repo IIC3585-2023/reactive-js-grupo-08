@@ -51,76 +51,7 @@ let charDiv = document.getElementById('character');
 document.addEventListener('keydown',handleKeys);
 var charLeftAdd =0;
 var charUpAdd = 0;
-
-
-function handleKeys(e){
-  let keypress = e.code;
-  switch (keypress) {
-    case 'ArrowRight':
-      if (checkMove(x,10)){
-        x+=10;
-        charDiv.style.left = x + 'px';
-      } 
-      break;
-    case 'ArrowLeft':
-      if (checkMove(x,-10)){
-        x-=10;
-        charDiv.style.left = x + 'px';
-      } 
-      break;
-    case 'ArrowUp':
-      if (checkMove(y,-10)){
-        y-=10;
-        charDiv.style.top = y + 'px';
-      } 
-      break;
-    case 'ArrowDown':
-      if (checkMove(y,+10)){
-        y+=10;
-        charDiv.style.top = y + 'px';
-      } 
-      break;
-    default:
-      console.log(x,y);
-      break;
-  }
-}
-
-let x = 2;
-let y = 3;
-charDiv.style.left=x;
-charDiv.style.top=y;
-const min = 0;
-const max = 487;
-
-//no funciona bien, se laggea una movida
-function checkMove(dim,input){
-    if (input+dim >= min && input+dim < max){
-      return true;
-    }
-    console.log(x,y);
-    return false;
-}
-
-function add(dim,input){
-  dim+=input;
-}
-
-/*
-var iDiv = document.createElement('div');
-iDiv.id = 'block';
-iDiv.className = 'block';
-document.getElementsByTagName('body')[0].appendChild(iDiv);
-
-// Now create and append to iDiv
-var innerDiv = document.createElement('div');
-innerDiv.className = 'block-2';
-
-// The variable iDiv is still good... Just append to it.
-iDiv.appendChild(innerDiv);
-*/
-
-
+const movement = 18;
 const layout =[
   ['X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X'],
   ['X','.','.','.','.','.','.','.','.','.','.','.','.','X','X','.','.','.','.','.','.','.','.','.','.','.','.','X'],
@@ -154,6 +85,123 @@ const layout =[
   ['X','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','.','X'],
   ['X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X','X'],
   ];
+
+
+function handleKeys(e){
+  let keypress = e.code;
+  switch (keypress) {
+    case 'ArrowRight':
+      if (checkMove(1)){
+        if (x == 486) {
+          x = 0;
+        } else {
+          x+=movement;
+        }
+        charDiv.style.left = x + 'px';
+      } 
+      break;
+    case 'ArrowLeft':
+      if (checkMove(2)){
+        if (x == 0) {
+          x = 486;
+        } else {
+          x-=movement;
+        }
+        charDiv.style.left = x + 'px';
+      } 
+      break;
+    case 'ArrowUp':
+      if (checkMove(3)){
+        y-=movement;
+        charDiv.style.top = y + 'px';
+      } 
+      break;
+    case 'ArrowDown':
+      if (checkMove(4)){
+        y+=movement;
+        charDiv.style.top = y + 'px';
+      } 
+      break;
+    default:
+      console.log(x,y);
+      break;
+  }
+}
+
+let x = 234; //18 * 13
+let y = 414; //18 * 23
+
+charDiv.style.left=x + 'px';
+charDiv.style.top=y + 'px';
+
+
+//no funciona bien, se laggea una movida
+function checkMove(input){
+  let new_x;
+  let new_y;
+  let grid_x;
+  let grid_y;
+  let grid_char; 
+
+  if (input == 1) {
+    //RIGHT
+    new_y = y;
+
+    if(x == 486) {
+      new_x = 0
+    } else {
+      new_x = x + 18;
+    }
+  } else if (input == 2) {
+    //LEFT
+    new_y = y;
+
+    if(x == 0) {
+      new_x = 486
+    } else {
+      new_x = x - 18;
+    }
+  } else if (input == 3) {
+    //UP
+    new_y = y - 18;
+    new_x = x;
+  } else if (input == 4) {
+    //DOWN
+    new_y = y + 18;
+    new_x = x;
+  }
+
+  grid_y = new_y / 18;
+  grid_x = new_x / 18;
+
+  grid_char = layout[grid_y][grid_x];
+
+  if (grid_char == "."){
+    return true
+  }
+  return false;
+}
+
+function add(dim,input){
+  dim+=input;
+}
+
+/*
+var iDiv = document.createElement('div');
+iDiv.id = 'block';
+iDiv.className = 'block';
+document.getElementsByTagName('body')[0].appendChild(iDiv);
+
+// Now create and append to iDiv
+var innerDiv = document.createElement('div');
+innerDiv.className = 'block-2';
+
+// The variable iDiv is still good... Just append to it.
+iDiv.appendChild(innerDiv);
+*/
+
+
+
 
 /*
 const mazeWidth = maze.offsetWidth;
