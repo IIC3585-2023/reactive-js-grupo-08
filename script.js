@@ -43,8 +43,10 @@ require(['jquery'], function($) {
 
 
 
-let gameDiv = document.getElementById('game');
-let charDiv = document.getElementById('character');
+const gameDiv = document.getElementById('game');
+const charDiv = document.getElementById('character');
+const button = document.getElementById('button');
+let start = false;
 
 //const keydown$ = Rx.fromEvent(document, "keydown");
 
@@ -137,6 +139,10 @@ charDiv.style.top=y + 'px';
 
 //no funciona bien, se laggea una movida
 function checkMove(input){
+  if (start == false){
+    return false;
+  }
+
   let new_x;
   let new_y;
   let grid_x;
@@ -177,7 +183,7 @@ function checkMove(input){
   grid_char = layout[grid_y][grid_x];
 
   if (grid_char == "."){
-    return true
+    return true;
   }
   return false;
 }
@@ -186,6 +192,28 @@ function add(dim,input){
   dim+=input;
 }
 
+
+function startGame(){
+  console.log("START");
+  button.disabled = "disabled";
+  button.src = 'imgs/BotonStartGris.png'
+  charDiv.style.visibility="visible";
+  start = true;
+  
+}
+
+function restartGame(){
+  console.log('RESTART');
+  button.disabled = "enabled";
+  button.src = 'imgs/BotonStartAzul.png'
+  charDiv.style.visibility="hidden";
+  start = false;
+
+  x = 234;
+  y = 414;
+  charDiv.style.left=x + 'px';
+  charDiv.style.top=y + 'px';
+}
 /*
 var iDiv = document.createElement('div');
 iDiv.id = 'block';
