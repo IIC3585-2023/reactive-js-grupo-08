@@ -46,6 +46,7 @@ require(['jquery'], function($) {
 const gameDiv = document.getElementById('game');
 const charDiv = document.getElementById('character');
 const button = document.getElementById('button');
+const resButton = document.getElementById('resButton');
 let start = false;
 
 //const keydown$ = Rx.fromEvent(document, "keydown");
@@ -197,6 +198,8 @@ function startGame(){
   console.log("START");
   button.disabled = "disabled";
   button.src = 'imgs/BotonStartGris.png'
+  resButton.src = 'imgs/RestartX.png';
+  resButton.disabled = false;
   charDiv.style.visibility="visible";
   start = true;
   
@@ -204,8 +207,10 @@ function startGame(){
 
 function restartGame(){
   console.log('RESTART');
-  button.disabled = "enabled";
+  button.disabled = false;
+  resButton.disabled = 'disabled';
   button.src = 'imgs/BotonStartAzul.png'
+  resButton.src = 'imgs/RestartXGris.png';
   charDiv.style.visibility="hidden";
   start = false;
 
