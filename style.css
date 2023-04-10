@@ -5,6 +5,9 @@
     margin-left: 10px;
   }
   
+  #background{
+    z-index: -2;
+  }
   #character {
     width: 18px;
     height: 18px;
@@ -34,11 +37,14 @@
     border-radius: 5px;
   }
 
-  #pangui1{
+  #pangui2{
     background-color: lightblue;
   }
-  #pangui2{
+  #pangui3{
     background-color: pink;
+  }
+  #pangui4{
+    background-color: orange;
   }
   #img{
     /*height: 40px;
@@ -82,5 +88,6 @@
     position: absolute;
     margin-left: 1px;
     margin-top: 1px;
+    z-index: 0;
   }
   
