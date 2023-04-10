@@ -13,19 +13,23 @@
   <h1>PacXD</h1>
   <p>Puntuacion: 0</p>
 
-
-
-  <div id="game">
-    <div id="background">
-      <img id="img" src="imgs/map.png">
+  <div id="restartButtonDiv">
+    <input type="image" id="resButton" src="imgs/RestartXGris.png" disabled onclick="restartGame()"/>
   </div>
 
-    <div id="character">
+  <div id="game">
+    
+    <div id="background">
+      <img id="img" src="imgs/map.png">
+    </div>
+
+    <div id="character" style="visibility: hidden;">
         <img id="img" src="imgs/jager.jpg">
     </div>
 
-
-
+    <div id="startButtonDiv">
+      <input type="image" id="button" src="imgs/BotonStartAzul.png" onclick="startGame()"/>
+    </div>
   </div>
 
   <script src="script.js"></script>
