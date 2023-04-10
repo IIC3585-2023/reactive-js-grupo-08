@@ -1,10 +1,29 @@
+  #parent{
+    position: relative;
+  }
+  
   #game {
     width: 504px;
     height: 558px;
-    position: relative;
+    position: absolute;
     margin-left: 10px;
   }
+
+  #gameOver{
+    width: 504px;
+    margin-left: 10px;
+    margin-top: 150px;
+    position: absolute;
+    z-index: 10;
+    visibility: hidden;
+  }
   
+  
+  #background{
+    z-index: -2;
+  }
+
+
   #character {
     width: 18px;
     height: 18px;
@@ -34,11 +53,14 @@
     border-radius: 5px;
   }
 
-  #pangui1{
+  #pangui2{
     background-color: lightblue;
   }
-  #pangui2{
+  #pangui3{
     background-color: pink;
+  }
+  #pangui4{
+    background-color: orange;
   }
   #img{
     /*height: 40px;
@@ -82,5 +104,5 @@
     position: absolute;
     margin-left: 1px;
     margin-top: 1px;
+    z-index: 0;
   }
-  
