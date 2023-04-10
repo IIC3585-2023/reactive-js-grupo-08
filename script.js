@@ -367,8 +367,6 @@ function setInitialValues(){
 }
 
 function setInitialPositions(){
-
-
   divFruta.style.top = '306px';
   divFruta.style.left = '252px';
 
