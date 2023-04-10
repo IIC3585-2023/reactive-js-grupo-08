@@ -1,45 +1,3 @@
-//const jsdom = require('jsdom');
-//const dom = new jsdom.JSDOM("");
-/*
-const jquery = require('jquery');
-
-require(['jquery'], function($) {
-    $(function() {
-      var distance = 10;
-      var speed = 100;
-      $( 'body' ).on( 'keydown', function( e ) {
-          var $target = $( '.character' );
-          var top = $target.css( 'top' );
-          var left = $target.css( 'left' );
-
-          switch ( e.keyCode ) {
-              case 37:  // [Left]
-                  $target.animate({ 'left': '-=' + distance }, speed);
-              break;
-
-              case 38:  // [Up]
-                  $target.animate({ 'top': '-=' + distance }, speed);
-              break;
-
-              case 39:  // [Right]
-                  $target.animate({ 'left': '+=' + distance }, speed);
-              break;
-
-              case 40:  // [Down]
-                  $target.animate({ 'top': '+=' + distance }, speed);
-              break;
-
-              default:
-                  return;
-          };
-      });    
-    });
-})
-*/
-
-
-
-
 //import { fromEvent, throttleTime, scan } from 'rxjs';
 
 
@@ -51,6 +9,7 @@ const resButton = document.getElementById('resButton');
 const pangui1 = document.getElementById('pangui1');
 const pangui2 = document.getElementById('pangui2');
 const pangui3 = document.getElementById('pangui3');
+const panguis = [pangui1,pangui2,pangui3];
 
 let start = false;
 
@@ -177,19 +136,26 @@ let y = 414; //18 * 23
 let x2 = 252; //18 * 14
 let y2 = 414; //18 * 23
 
-let xEnemigo1 = 234; //18 * 13
+/* let xEnemigo1 = 234; //18 * 13
 let yEnemigo1 = 198; //18 * 23
 let xEnemigo2 = 252; //18 * 14
 let yEnemigo2 = 198; //18 * 23
 let xEnemigo3 = 216; //18 * 14
-let yEnemigo3 = 414; //18 * 23
+let yEnemigo3 = 198; //18 * 23 */
 
-pangui1.style.left = xEnemigo1 + 'px';
+const panguiCords=[[234,198],[252,198],[216,198]];
+
+panguis.map((value,index)=>{
+  value.style.left = panguiCords[index][0] + 'px';
+  value.style.top = panguiCords[index][1] + 'px';
+})
+
+/* pangui1.style.left = xEnemigo1 + 'px';
 pangui1.style.top = yEnemigo1 + 'px';
 pangui2.style.left = xEnemigo2 + 'px';
 pangui2.style.top = yEnemigo2 + 'px';
 pangui3.style.left = xEnemigo3 + 'px';
-pangui3.style.top = yEnemigo3 + 'px';
+pangui3.style.top = yEnemigo3 + 'px'; */
 
 
 
@@ -262,6 +228,7 @@ function startGame(){
   pangui2.style.visibility="visible";
   pangui3.style.visibility="visible";
   start = true;
+  startTimer();
   
 }
 
@@ -277,6 +244,7 @@ function restartGame(){
   pangui2.style.visibility="hidden";
   pangui3.style.visibility="hidden";
   start = false;
+  abortTimer();
 
   x = 234;
   y = 414;
@@ -287,4 +255,72 @@ function restartGame(){
   y2 = 414;
   charP2Div.style.left=x2 + 'px';
   charP2Div.style.top=y2 + 'px';
+}
+
+// en el setup
+var tid;
+//en el start
+function randomMov(){
+/*   console.log("randomMov");
+  console.log(panguiCords);
+  console.log(panguis); */
+  panguis.map((value,index)=>{
+    console.log(panguiCords);
+    let panguiMoves = [
+      [panguiCords[index][1], panguiCords[index][0]+movement],
+      [panguiCords[index][1], panguiCords[index][0]-movement],
+      [panguiCords[index][1]-movement, panguiCords[index][0]],
+      [panguiCords[index][1]+movement, panguiCords[index][0]]
+      ].filter(e=>layout[e[0]/18][e[1]/18] === ".");
+      console.log(panguiMoves);
+      let par1 = Math.floor(Math.random() * panguiMoves.length);
+      panguiCords[index][0]=panguiMoves[par1][1];
+      panguiCords[index][1]=panguiMoves[par1][0];
+      value.style.left = panguiMoves[par1][1] + 'px';
+      value.style.top = panguiMoves[par1][0] + 'px';
+  })
+}
+/* function randomMovOld(){
+  let pangui1Moves = [
+  [yEnemigo1, xEnemigo1+movement,1],
+  [yEnemigo1, xEnemigo1-movement,2],
+  [yEnemigo1-movement, xEnemigo1,3],
+  [yEnemigo1+movement, xEnemigo1,4]].
+  filter(value=>layout[value[0]/18][value[1]/18] === ".");
+  let par1 = Math.floor(Math.random() * pangui1Moves.length);
+  xEnemigo1=pangui1Moves[par1][1];
+  yEnemigo1=pangui1Moves[par1][0];
+  pangui1.style.left = pangui1Moves[par1][1] + 'px';
+  pangui1.style.top = pangui1Moves[par1][0] + 'px';
+
+  let pangui2Moves = [
+    [yEnemigo2, xEnemigo2+movement,2],
+    [yEnemigo2, xEnemigo2-movement,2],
+    [yEnemigo2-movement, xEnemigo2,3],
+    [yEnemigo2+movement, xEnemigo2,4]].
+    filter(value=>layout[value[0]/18][value[1]/18] === ".");
+    let par2 = Math.floor(Math.random() * pangui2Moves.length);
+    xEnemigo2=pangui2Moves[par2][1];
+    yEnemigo2=pangui2Moves[par2][0];
+    pangui2.style.left = pangui2Moves[par2][1] + 'px';
+    pangui2.style.top = pangui2Moves[par2][0] + 'px';
+
+    let pangui3Moves = [
+      [yEnemigo3, xEnemigo3+movement,3],
+      [yEnemigo3, xEnemigo3-movement,3],
+      [yEnemigo3-movement, xEnemigo3,3],
+      [yEnemigo3+movement, xEnemigo3,4]].
+      filter(value=>layout[value[0]/18][value[1]/18] === ".");
+      let par3 = Math.floor(Math.random() * pangui3Moves.length);
+      xEnemigo3=pangui3Moves[par3][1];
+      yEnemigo3=pangui3Moves[par3][0];
+      pangui3.style.left = pangui3Moves[par3][1] + 'px';
+      pangui3.style.top = pangui3Moves[par3][0] + 'px';
+} */
+function abortTimer() { // to be called when you want to stop the timer
+  clearInterval(tid);
+}
+
+function startTimer() { // to be called when you want to start the timer
+  tid = setInterval(randomMov,200);
 }
