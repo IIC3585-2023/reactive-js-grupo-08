@@ -11,7 +11,21 @@ const pangui2 = document.getElementById('pangui2');
 const pangui3 = document.getElementById('pangui3');
 const panguis = [pangui1,pangui2,pangui3];
 
+const divFruta = document.getElementById('fruit');
+const divPill1 = document.getElementById('pill1')
+const divPill2 = document.getElementById('pill2')
+const divPill3 = document.getElementById('pill3')
+const divPill4 = document.getElementById('pill4')
+
 let start = false;
+let boolFruta = true;
+let Pill1 = true;
+let Pill2 = true;
+let Pill3 = true;
+let Pill4 = true;
+
+let score = 0;
+document.getElementById("score").innerHTML = score;
 
 //const keydown$ = Rx.fromEvent(document, "keydown");
 
@@ -68,6 +82,8 @@ function handleKeys(e){
           x+=movement;
         }
         charDiv.style.left = x + 'px';
+
+        eat(x, y);
       } 
       break;
     case 'ArrowLeft':
@@ -78,18 +94,24 @@ function handleKeys(e){
           x-=movement;
         }
         charDiv.style.left = x + 'px';
+
+        eat(x, y);
       } 
       break;
     case 'ArrowUp':
       if (checkMove(3,x,y)){
         y-=movement;
         charDiv.style.top = y + 'px';
+
+        eat(x, y);
       } 
       break;
     case 'ArrowDown':
       if (checkMove(4,x,y)){
         y+=movement;
         charDiv.style.top = y + 'px';
+
+        eat(x, y);
       } 
       break;
     case 'KeyD':
@@ -100,6 +122,8 @@ function handleKeys(e){
           x2+=movement;
         }
         charP2Div.style.left = x2 + 'px';
+
+        eat(x2, y2);
       } 
       break;
     case 'KeyA':
@@ -110,18 +134,25 @@ function handleKeys(e){
           x2-=movement;
         }
         charP2Div.style.left = x2 + 'px';
+
+        eat(x2, y2);
       } 
       break;
     case 'KeyW':
       if (checkMove(3,x2,y2)){
         y2-=movement;
         charP2Div.style.top = y2 + 'px';
+
+        eat(x2, y2);
+
       } 
       break;
     case 'KeyS':
       if (checkMove(4,x2,y2)){
         y2+=movement;
         charP2Div.style.top = y2 + 'px';
+
+        eat(x2, y2);
       } 
       break;
     default:
@@ -131,17 +162,17 @@ function handleKeys(e){
   }
 }
 
-let x = 234; //18 * 13
-let y = 414; //18 * 23
-let x2 = 252; //18 * 14
-let y2 = 414; //18 * 23
+let x;
+let y;
+let x2;
+let y2;
 
-/* let xEnemigo1 = 234; //18 * 13
-let yEnemigo1 = 198; //18 * 23
-let xEnemigo2 = 252; //18 * 14
-let yEnemigo2 = 198; //18 * 23
-let xEnemigo3 = 216; //18 * 14
-let yEnemigo3 = 198; //18 * 23 */
+let xEnemigo1;
+let yEnemigo1;
+let xEnemigo2;
+let yEnemigo2;
+let xEnemigo3;
+let yEnemigo3;
 
 const panguiCords=[[234,198],[252,198],[216,198]];
 
@@ -157,12 +188,11 @@ pangui2.style.top = yEnemigo2 + 'px';
 pangui3.style.left = xEnemigo3 + 'px';
 pangui3.style.top = yEnemigo3 + 'px'; */
 
+let xFruta;
+let yFruta;
 
-
-charDiv.style.left = x + 'px';
-charDiv.style.top = y + 'px';
-charP2Div.style.left = x2 + 'px';
-charP2Div.style.top = y2 + 'px';
+setInitialValues();
+setInitialPositions();
 
 //no funciona bien, se laggea una movida
 function checkMove(input,x,y){
@@ -243,18 +273,139 @@ function restartGame(){
   pangui1.style.visibility="hidden";
   pangui2.style.visibility="hidden";
   pangui3.style.visibility="hidden";
-  start = false;
+  divFruta.style.visibility="visible";
+  divPill1.style.visibility="visible";
+  divPill2.style.visibility="visible";
+  divPill3.style.visibility="visible";
+  divPill4.style.visibility="visible";
+   start = false;
   abortTimer();
 
-  x = 234;
-  y = 414;
-  charDiv.style.left=x + 'px';
-  charDiv.style.top=y + 'px';
+  setInitialPositions()
+  setInitialValues();
+}
 
-  x2 = 252;
-  y2 = 414;
-  charP2Div.style.left=x2 + 'px';
-  charP2Div.style.top=y2 + 'px';
+function checkForFruit(x, y){
+  if (boolFruta) {
+    if (x == xFruta && y == yFruta) {
+      return true;
+    }
+
+    return false;
+  }
+
+  return false;
+}
+
+function eatFruit(){
+  score += 200;
+  document.getElementById("score").innerHTML = score;
+  divFruta.style.visibility = 'hidden';
+  boolFruta = false;
+}
+
+function showFruit(){
+  let fruitX;
+  let fruitY;
+}
+
+function checkForPill(x, y){
+  if (x == 18 && y == 18 && Pill1) {
+    return 1;
+  } else if (x == 468 && y == 18 && Pill2) {
+    return 2;
+  } else if (x == 18 && y == 522 && Pill3) {
+    return 3;
+  } else if (x == 468 && y == 522 && Pill4) {
+    return 4;
+  }
+
+  return 0;
+}
+
+function eatPill(pill) {
+  console.log("POWER PILL");
+  score += 100;
+  document.getElementById("score").innerHTML = score;
+
+  if (pill == 1) {
+    Pill1 = false;
+    divPill1.style.visibility = 'hidden';
+  }
+  else if (pill == 2) {
+    Pill2 = false;
+    divPill2.style.visibility = 'hidden';
+  }
+  else if (pill == 3) {
+    Pill3 = false;
+    divPill3.style.visibility = 'hidden';
+  }
+  else if (pill == 4) {
+    Pill4 = false;
+    divPill4.style.visibility = 'hidden';
+  }
+}
+
+function eat(x, y) {
+  let ateFruit = checkForFruit(x, y);
+  if (ateFruit) {eatFruit();}
+
+  let pill = checkForPill(x, y);
+  if (pill != 0) {eatPill(pill);}
+}
+function setInitialValues(){
+  x = 234; //18 * 13
+  y = 414; //18 * 23
+  x2 = 252; //18 * 14
+  y2 = 414; //18 * 23
+
+  xEnemigo1 = 234; //18 * 13
+  yEnemigo1 = 198; //18 * 23
+  xEnemigo2 = 252; //18 * 14
+  yEnemigo2 = 198; //18 * 23
+  xEnemigo3 = 216; //18 * 14
+  yEnemigo3 = 414; //18 * 23
+
+  xFruta = 18 * 14;
+  yFruta = 18 * 17;
+
+  boolFruta = true;
+  start = false;
+  Pill1 = true;
+  Pill2 = true;
+  Pill3 = true;
+  Pill4 = true;
+}
+
+function setInitialPositions(){
+  pangui1.style.left = xEnemigo1 + 'px';
+  pangui1.style.top = yEnemigo1 + 'px';
+  pangui2.style.left = xEnemigo2 + 'px';
+  pangui2.style.top = yEnemigo2 + 'px';
+  pangui3.style.left = xEnemigo3 + 'px';
+  pangui3.style.top = yEnemigo3 + 'px';
+
+  divFruta.style.top = '306px';
+  divFruta.style.left = '252px';
+
+  charDiv.style.left = '234px';
+  charDiv.style.top = '414px';
+  charP2Div.style.left ='252px';
+  charP2Div.style.top = '414px';
+
+  divPill1.style.top = '18px';
+  divPill1.style.left = '18px';
+
+  divPill2.style.top = '18px';
+  divPill2.style.left = '468px';
+
+  divPill3.style.top = '522px';
+  divPill3.style.left = '18px';
+
+  divPill4.style.top = '522px';
+  divPill4.style.left = '468px';
+
+
 }
 
 // en el setup
@@ -280,43 +431,7 @@ function randomMov(){
       value.style.top = panguiMoves[par1][0] + 'px';
   })
 }
-/* function randomMovOld(){
-  let pangui1Moves = [
-  [yEnemigo1, xEnemigo1+movement,1],
-  [yEnemigo1, xEnemigo1-movement,2],
-  [yEnemigo1-movement, xEnemigo1,3],
-  [yEnemigo1+movement, xEnemigo1,4]].
-  filter(value=>layout[value[0]/18][value[1]/18] === ".");
-  let par1 = Math.floor(Math.random() * pangui1Moves.length);
-  xEnemigo1=pangui1Moves[par1][1];
-  yEnemigo1=pangui1Moves[par1][0];
-  pangui1.style.left = pangui1Moves[par1][1] + 'px';
-  pangui1.style.top = pangui1Moves[par1][0] + 'px';
 
-  let pangui2Moves = [
-    [yEnemigo2, xEnemigo2+movement,2],
-    [yEnemigo2, xEnemigo2-movement,2],
-    [yEnemigo2-movement, xEnemigo2,3],
-    [yEnemigo2+movement, xEnemigo2,4]].
-    filter(value=>layout[value[0]/18][value[1]/18] === ".");
-    let par2 = Math.floor(Math.random() * pangui2Moves.length);
-    xEnemigo2=pangui2Moves[par2][1];
-    yEnemigo2=pangui2Moves[par2][0];
-    pangui2.style.left = pangui2Moves[par2][1] + 'px';
-    pangui2.style.top = pangui2Moves[par2][0] + 'px';
-
-    let pangui3Moves = [
-      [yEnemigo3, xEnemigo3+movement,3],
-      [yEnemigo3, xEnemigo3-movement,3],
-      [yEnemigo3-movement, xEnemigo3,3],
-      [yEnemigo3+movement, xEnemigo3,4]].
-      filter(value=>layout[value[0]/18][value[1]/18] === ".");
-      let par3 = Math.floor(Math.random() * pangui3Moves.length);
-      xEnemigo3=pangui3Moves[par3][1];
-      yEnemigo3=pangui3Moves[par3][0];
-      pangui3.style.left = pangui3Moves[par3][1] + 'px';
-      pangui3.style.top = pangui3Moves[par3][0] + 'px';
-} */
 function abortTimer() { // to be called when you want to stop the timer
   clearInterval(tid);
 }
