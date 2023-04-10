@@ -11,12 +11,28 @@
     outline: 1px solid grey;
     background-color: yellow;
     position: absolute;
-    top:2 px;
     border-radius: 5px;
-    left:2px;
     /*animation: jump 300ms */
   }
 
+  #characterP2 {
+    width: 18px;
+    height: 18px;
+    outline: 1px solid grey;
+    background-color: yellow;
+    position: absolute;
+    border-radius: 5px;
+    /*animation: jump 300ms */
+  }
+
+  .pangui{
+    width: 18px;
+    height: 18px;
+    outline: 1px solid grey;
+    background-color: red;
+    position: absolute;
+    border-radius: 5px;
+  }
 
   #img{
     /*height: 40px;
@@ -47,21 +63,6 @@
 
 
 
-  #maze {
-    width: 400px;
-    height: 400px;
-    background-image: url('imgs/jager.jpg');
-    background-size: 100%;
-  }
-  
-  #player {
-    width: 50px;
-    height: 50px;
-    background-color: red;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
   * {
     padding: 0;
     margin: 22;
