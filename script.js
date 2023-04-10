@@ -52,10 +52,15 @@ const pangui1 = document.getElementById('pangui1');
 const pangui2 = document.getElementById('pangui2');
 const pangui3 = document.getElementById('pangui3');
 const divFruta = document.getElementById('fruit');
+const divPill1 = document.getElementById('pill1')
+const divPill2 = document.getElementById('pill2')
+const divPill3 = document.getElementById('pill3')
+const divPill4 = document.getElementById('pill4')
 
 let start = false;
 let boolFruta = true;
 let score = 0;
+document.getElementById("score").innerHTML = score;
 
 //const keydown$ = Rx.fromEvent(document, "keydown");
 
@@ -317,6 +322,7 @@ function checkForFruit(x, y){
 
 function eatFruit(){
   score += 200;
+  document.getElementById("score").innerHTML = score;
   divFruta.style.visibility = 'hidden';
   boolFruta = false;
 }
@@ -359,4 +365,18 @@ function setInitialPositions(){
   charDiv.style.top = '414px';
   charP2Div.style.left ='252px';
   charP2Div.style.top = '414px';
+
+  divPill1.style.top = '18px';
+  divPill1.style.left = '18px';
+
+  divPill2.style.top = '18px';
+  divPill2.style.left = '468px';
+
+  divPill3.style.top = '522px';
+  divPill3.style.left = '18px';
+
+  divPill4.style.top = '522px';
+  divPill4.style.left = '468px';
+
+
 }
