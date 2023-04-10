@@ -34,6 +34,12 @@
     border-radius: 5px;
   }
 
+  #pangui1{
+    background-color: lightblue;
+  }
+  #pangui2{
+    background-color: pink;
+  }
   #img{
     /*height: 40px;
     width: 40px;

@@ -1,45 +1,3 @@
-//const jsdom = require('jsdom');
-//const dom = new jsdom.JSDOM("");
-/*
-const jquery = require('jquery');
-
-require(['jquery'], function($) {
-    $(function() {
-      var distance = 10;
-      var speed = 100;
-      $( 'body' ).on( 'keydown', function( e ) {
-          var $target = $( '.character' );
-          var top = $target.css( 'top' );
-          var left = $target.css( 'left' );
-
-          switch ( e.keyCode ) {
-              case 37:  // [Left]
-                  $target.animateFruit({ 'left': '-=' + distance }, speed);
-              break;
-
-              case 38:  // [Up]
-                  $target.animateFruit({ 'top': '-=' + distance }, speed);
-              break;
-
-              case 39:  // [Right]
-                  $target.animateFruit({ 'left': '+=' + distance }, speed);
-              break;
-
-              case 40:  // [Down]
-                  $target.animateFruit({ 'top': '+=' + distance }, speed);
-              break;
-
-              default:
-                  return;
-          };
-      });    
-    });
-})
-*/
-
-
-
-
 //import { fromEvent, throttleTime, scan } from 'rxjs';
 
 
@@ -51,6 +9,8 @@ const resButton = document.getElementById('resButton');
 const pangui1 = document.getElementById('pangui1');
 const pangui2 = document.getElementById('pangui2');
 const pangui3 = document.getElementById('pangui3');
+const panguis = [pangui1,pangui2,pangui3];
+
 const divFruta = document.getElementById('fruit');
 const divPill1 = document.getElementById('pill1')
 const divPill2 = document.getElementById('pill2')
@@ -214,6 +174,20 @@ let yEnemigo2;
 let xEnemigo3;
 let yEnemigo3;
 
+const panguiCords=[[234,198],[252,198],[216,198]];
+
+panguis.map((value,index)=>{
+  value.style.left = panguiCords[index][0] + 'px';
+  value.style.top = panguiCords[index][1] + 'px';
+})
+
+/* pangui1.style.left = xEnemigo1 + 'px';
+pangui1.style.top = yEnemigo1 + 'px';
+pangui2.style.left = xEnemigo2 + 'px';
+pangui2.style.top = yEnemigo2 + 'px';
+pangui3.style.left = xEnemigo3 + 'px';
+pangui3.style.top = yEnemigo3 + 'px'; */
+
 let xFruta;
 let yFruta;
 
@@ -284,6 +258,7 @@ function startGame(){
   pangui2.style.visibility="visible";
   pangui3.style.visibility="visible";
   start = true;
+  startTimer();
   
 }
 
@@ -303,6 +278,8 @@ function restartGame(){
   divPill2.style.visibility="visible";
   divPill3.style.visibility="visible";
   divPill4.style.visibility="visible";
+   start = false;
+  abortTimer();
 
   setInitialPositions()
   setInitialValues();
@@ -429,4 +406,36 @@ function setInitialPositions(){
   divPill4.style.left = '468px';
 
 
+}
+
+// en el setup
+var tid;
+//en el start
+function randomMov(){
+/*   console.log("randomMov");
+  console.log(panguiCords);
+  console.log(panguis); */
+  panguis.map((value,index)=>{
+    console.log(panguiCords);
+    let panguiMoves = [
+      [panguiCords[index][1], panguiCords[index][0]+movement],
+      [panguiCords[index][1], panguiCords[index][0]-movement],
+      [panguiCords[index][1]-movement, panguiCords[index][0]],
+      [panguiCords[index][1]+movement, panguiCords[index][0]]
+      ].filter(e=>layout[e[0]/18][e[1]/18] === ".");
+      console.log(panguiMoves);
+      let par1 = Math.floor(Math.random() * panguiMoves.length);
+      panguiCords[index][0]=panguiMoves[par1][1];
+      panguiCords[index][1]=panguiMoves[par1][0];
+      value.style.left = panguiMoves[par1][1] + 'px';
+      value.style.top = panguiMoves[par1][0] + 'px';
+  })
+}
+
+function abortTimer() { // to be called when you want to stop the timer
+  clearInterval(tid);
+}
+
+function startTimer() { // to be called when you want to start the timer
+  tid = setInterval(randomMov,200);
 }
