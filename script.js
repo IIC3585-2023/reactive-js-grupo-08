@@ -14,19 +14,19 @@ require(['jquery'], function($) {
 
           switch ( e.keyCode ) {
               case 37:  // [Left]
-                  $target.animate({ 'left': '-=' + distance }, speed);
+                  $target.animateFruit({ 'left': '-=' + distance }, speed);
               break;
 
               case 38:  // [Up]
-                  $target.animate({ 'top': '-=' + distance }, speed);
+                  $target.animateFruit({ 'top': '-=' + distance }, speed);
               break;
 
               case 39:  // [Right]
-                  $target.animate({ 'left': '+=' + distance }, speed);
+                  $target.animateFruit({ 'left': '+=' + distance }, speed);
               break;
 
               case 40:  // [Down]
-                  $target.animate({ 'top': '+=' + distance }, speed);
+                  $target.animateFruit({ 'top': '+=' + distance }, speed);
               break;
 
               default:
@@ -59,6 +59,11 @@ const divPill4 = document.getElementById('pill4')
 
 let start = false;
 let boolFruta = true;
+let Pill1 = true;
+let Pill2 = true;
+let Pill3 = true;
+let Pill4 = true;
+
 let score = 0;
 document.getElementById("score").innerHTML = score;
 
@@ -118,8 +123,7 @@ function handleKeys(e){
         }
         charDiv.style.left = x + 'px';
 
-        let ate = checkForFruit(x, y);
-        if (ate) {eatFruit();}
+        eat(x, y);
       } 
       break;
     case 'ArrowLeft':
@@ -131,8 +135,7 @@ function handleKeys(e){
         }
         charDiv.style.left = x + 'px';
 
-        let ate = checkForFruit(x, y);
-        if (ate) {eatFruit();}
+        eat(x, y);
       } 
       break;
     case 'ArrowUp':
@@ -140,8 +143,7 @@ function handleKeys(e){
         y-=movement;
         charDiv.style.top = y + 'px';
 
-        let ate = checkForFruit(x, y);
-        if (ate) {eatFruit();}
+        eat(x, y);
       } 
       break;
     case 'ArrowDown':
@@ -149,8 +151,7 @@ function handleKeys(e){
         y+=movement;
         charDiv.style.top = y + 'px';
 
-        let ate = checkForFruit(x, y);
-        if (ate) {eatFruit();}
+        eat(x, y);
       } 
       break;
     case 'KeyD':
@@ -162,8 +163,7 @@ function handleKeys(e){
         }
         charP2Div.style.left = x2 + 'px';
 
-        let ate = checkForFruit(x2, y2);
-        if (ate) {eatFruit();}
+        eat(x2, y2);
       } 
       break;
     case 'KeyA':
@@ -175,8 +175,7 @@ function handleKeys(e){
         }
         charP2Div.style.left = x2 + 'px';
 
-        let ate = checkForFruit(x2, y2);
-        if (ate) {eatFruit();}
+        eat(x2, y2);
       } 
       break;
     case 'KeyW':
@@ -184,8 +183,8 @@ function handleKeys(e){
         y2-=movement;
         charP2Div.style.top = y2 + 'px';
 
-        let ate = checkForFruit(x2, y2);
-        if (ate) {eatFruit();}
+        eat(x2, y2);
+
       } 
       break;
     case 'KeyS':
@@ -193,8 +192,7 @@ function handleKeys(e){
         y2+=movement;
         charP2Div.style.top = y2 + 'px';
 
-        let ate = checkForFruit(x2, y2);
-        if (ate) {eatFruit();}
+        eat(x2, y2);
       } 
       break;
     default:
@@ -301,8 +299,10 @@ function restartGame(){
   pangui2.style.visibility="hidden";
   pangui3.style.visibility="hidden";
   divFruta.style.visibility="visible";
-  boolFruta = true;
-  start = false;
+  divPill1.style.visibility="visible";
+  divPill2.style.visibility="visible";
+  divPill3.style.visibility="visible";
+  divPill4.style.visibility="visible";
 
   setInitialPositions()
   setInitialValues();
@@ -332,7 +332,50 @@ function showFruit(){
   let fruitY;
 }
 
+function checkForPill(x, y){
+  if (x == 18 && y == 18 && Pill1) {
+    return 1;
+  } else if (x == 468 && y == 18 && Pill2) {
+    return 2;
+  } else if (x == 18 && y == 522 && Pill3) {
+    return 3;
+  } else if (x == 468 && y == 522 && Pill4) {
+    return 4;
+  }
 
+  return 0;
+}
+
+function eatPill(pill) {
+  console.log("POWER PILL");
+  score += 100;
+  document.getElementById("score").innerHTML = score;
+
+  if (pill == 1) {
+    Pill1 = false;
+    divPill1.style.visibility = 'hidden';
+  }
+  else if (pill == 2) {
+    Pill2 = false;
+    divPill2.style.visibility = 'hidden';
+  }
+  else if (pill == 3) {
+    Pill3 = false;
+    divPill3.style.visibility = 'hidden';
+  }
+  else if (pill == 4) {
+    Pill4 = false;
+    divPill4.style.visibility = 'hidden';
+  }
+}
+
+function eat(x, y) {
+  let ateFruit = checkForFruit(x, y);
+  if (ateFruit) {eatFruit();}
+
+  let pill = checkForPill(x, y);
+  if (pill != 0) {eatPill(pill);}
+}
 function setInitialValues(){
   x = 234; //18 * 13
   y = 414; //18 * 23
@@ -348,6 +391,13 @@ function setInitialValues(){
 
   xFruta = 18 * 14;
   yFruta = 18 * 17;
+
+  boolFruta = true;
+  start = false;
+  Pill1 = true;
+  Pill2 = true;
+  Pill3 = true;
+  Pill4 = true;
 }
 
 function setInitialPositions(){
