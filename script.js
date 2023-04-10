@@ -51,8 +51,11 @@ const resButton = document.getElementById('resButton');
 const pangui1 = document.getElementById('pangui1');
 const pangui2 = document.getElementById('pangui2');
 const pangui3 = document.getElementById('pangui3');
+const divFruta = document.getElementById('fruit');
 
 let start = false;
+let boolFruta = true;
+let score = 0;
 
 //const keydown$ = Rx.fromEvent(document, "keydown");
 
@@ -109,6 +112,9 @@ function handleKeys(e){
           x+=movement;
         }
         charDiv.style.left = x + 'px';
+
+        let ate = checkForFruit(x, y);
+        if (ate) {eatFruit();}
       } 
       break;
     case 'ArrowLeft':
@@ -119,18 +125,27 @@ function handleKeys(e){
           x-=movement;
         }
         charDiv.style.left = x + 'px';
+
+        let ate = checkForFruit(x, y);
+        if (ate) {eatFruit();}
       } 
       break;
     case 'ArrowUp':
       if (checkMove(3,x,y)){
         y-=movement;
         charDiv.style.top = y + 'px';
+
+        let ate = checkForFruit(x, y);
+        if (ate) {eatFruit();}
       } 
       break;
     case 'ArrowDown':
       if (checkMove(4,x,y)){
         y+=movement;
         charDiv.style.top = y + 'px';
+
+        let ate = checkForFruit(x, y);
+        if (ate) {eatFruit();}
       } 
       break;
     case 'KeyD':
@@ -141,6 +156,9 @@ function handleKeys(e){
           x2+=movement;
         }
         charP2Div.style.left = x2 + 'px';
+
+        let ate = checkForFruit(x2, y2);
+        if (ate) {eatFruit();}
       } 
       break;
     case 'KeyA':
@@ -151,18 +169,27 @@ function handleKeys(e){
           x2-=movement;
         }
         charP2Div.style.left = x2 + 'px';
+
+        let ate = checkForFruit(x2, y2);
+        if (ate) {eatFruit();}
       } 
       break;
     case 'KeyW':
       if (checkMove(3,x2,y2)){
         y2-=movement;
         charP2Div.style.top = y2 + 'px';
+
+        let ate = checkForFruit(x2, y2);
+        if (ate) {eatFruit();}
       } 
       break;
     case 'KeyS':
       if (checkMove(4,x2,y2)){
         y2+=movement;
         charP2Div.style.top = y2 + 'px';
+
+        let ate = checkForFruit(x2, y2);
+        if (ate) {eatFruit();}
       } 
       break;
     default:
@@ -172,31 +199,23 @@ function handleKeys(e){
   }
 }
 
-let x = 234; //18 * 13
-let y = 414; //18 * 23
-let x2 = 252; //18 * 14
-let y2 = 414; //18 * 23
+let x;
+let y;
+let x2;
+let y2;
 
-let xEnemigo1 = 234; //18 * 13
-let yEnemigo1 = 198; //18 * 23
-let xEnemigo2 = 252; //18 * 14
-let yEnemigo2 = 198; //18 * 23
-let xEnemigo3 = 216; //18 * 14
-let yEnemigo3 = 414; //18 * 23
+let xEnemigo1;
+let yEnemigo1;
+let xEnemigo2;
+let yEnemigo2;
+let xEnemigo3;
+let yEnemigo3;
 
-pangui1.style.left = xEnemigo1 + 'px';
-pangui1.style.top = yEnemigo1 + 'px';
-pangui2.style.left = xEnemigo2 + 'px';
-pangui2.style.top = yEnemigo2 + 'px';
-pangui3.style.left = xEnemigo3 + 'px';
-pangui3.style.top = yEnemigo3 + 'px';
+let xFruta;
+let yFruta;
 
-
-
-charDiv.style.left = x + 'px';
-charDiv.style.top = y + 'px';
-charP2Div.style.left = x2 + 'px';
-charP2Div.style.top = y2 + 'px';
+setInitialValues();
+setInitialPositions();
 
 //no funciona bien, se laggea una movida
 function checkMove(input,x,y){
@@ -276,214 +295,68 @@ function restartGame(){
   pangui1.style.visibility="hidden";
   pangui2.style.visibility="hidden";
   pangui3.style.visibility="hidden";
+  divFruta.style.visibility="visible";
+  boolFruta = true;
   start = false;
 
-  x = 234;
-  y = 414;
-  charDiv.style.left=x + 'px';
-  charDiv.style.top=y + 'px';
-
-  x2 = 252;
-  y2 = 414;
-  charP2Div.style.left=x2 + 'px';
-  charP2Div.style.top=y2 + 'px';
+  setInitialPositions()
+  setInitialValues();
 }
-/*
-var iDiv = document.createElement('div');
-iDiv.id = 'block';
-iDiv.className = 'block';
-document.getElementsByTagName('body')[0].appendChild(iDiv);
 
-// Now create and append to iDiv
-var innerDiv = document.createElement('div');
-innerDiv.className = 'block-2';
+function checkForFruit(x, y){
+  if (boolFruta) {
+    if (x == xFruta && y == yFruta) {
+      return true;
+    }
 
-// The variable iDiv is still good... Just append to it.
-iDiv.appendChild(innerDiv);
-*/
-
-
-
-
-/*
-const mazeWidth = maze.offsetWidth;
-const mazeHeight = maze.offsetHeight;
-const playerWidth = player.offsetWidth;
-const playerHeight = player.offsetHeight;
-
-
-
-
-
-  // Detect collision with walls
-  const playerRect = player.getBoundingClientRect();
-  const mazeRect = maze.getBoundingClientRect();
-  if (playerRect.left < mazeRect.left) {
-    x = 0;
-  }
-  if (playerRect.right > mazeRect.right) {
-    x = mazeWidth - playerWidth;
-  }
-  if (playerRect.top < mazeRect.top) {
-    y = 0;
-  }
-  if (playerRect.bottom > mazeRect.bottom) {
-    y = mazeHeight - playerHeight;
+    return false;
   }
 
-  player.style.left = x + 'px';
-  player.style.top = y + 'px';
-});
+  return false;
+}
 
-/*
-const mazeWidth = maze.offsetWidth;
-const mazeHeight = maze.offsetHeight;
-const playerWidth = player.offsetWidth;
-const playerHeight = player.offsetHeight;
+function eatFruit(){
+  score += 200;
+  divFruta.style.visibility = 'hidden';
+  boolFruta = false;
+}
 
-
-// index.js
-//const maze = document.getElementById("maze");
-
-// Crear un observable para los eventos de teclado
-const keydown$ = Rx.fromEvent(document, "keydown");
-
-// Crear un observable para las actualizaciones de la posición del personaje
-const position$ = keydown$.pipe(
-  map((event) => {
-    // Obtener la dirección del evento de teclado
-    const direction = event.key;
-
-    // Actualizar la posición del personaje en función de la dirección
-    // Aquí se puede usar la misma lógica que en el ejemplo anterior
-    return newPosition;
-  })
-);
-
-// Suscribirse al observable de posición para actualizar el laberinto
-position$.subscribe((position) => {
-  // Actualizar la posición del personaje en el laberinto
-  // Aquí se puede usar la misma lógica que en el ejemplo anterior
-  maze.style.left = position.x + "px";
-  maze.style.top = position.y + "px";
-});
-
-
-let x = 0;
-let y = 0;
-
-document.addEventListener('keydown', function(event) {
-  switch (event.key) {
-    case 'a':
-      x -= 10;
-      break;
-    case 'd':
-      x += 10;
-      break;
-    case 'w':
-      y -= 10;
-      break;
-    case 's':
-      y += 10;
-      break;
-    default:
-      break;
-  }
-
-  // Detect collision with walls
-  const playerRect = player.getBoundingClientRect();
-  const mazeRect = maze.getBoundingClientRect();
-  if (playerRect.left < mazeRect.left) {
-    x = 0;
-  }
-  if (playerRect.right > mazeRect.right) {
-    x = mazeWidth - playerWidth;
-  }
-  if (playerRect.top < mazeRect.top) {
-    y = 0;
-  }
-  if (playerRect.bottom > mazeRect.bottom) {
-    y = mazeHeight - playerHeight;
-  }
-
-  player.style.left = x + 'px';
-  player.style.top = y + 'px';
-});
-
-
-
-//<div id="pacman"></div>
-//<script src="index.js"></script>
-*/
-/*
-var character = document.getElementById("character");
-var enemy = document.getElementById("enemy");
-
-function jump() {
-
-  if (character.classlist != "animate") {
-    character.classList.add("animate");
-  }
-  setTimeout(function() {
-    character.classList.remove("animate");
-  }, 500);
-
+function showFruit(){
+  let fruitX;
+  let fruitY;
 }
 
 
+function setInitialValues(){
+  x = 234; //18 * 13
+  y = 414; //18 * 23
+  x2 = 252; //18 * 14
+  y2 = 414; //18 * 23
 
-function right() {
+  xEnemigo1 = 234; //18 * 13
+  yEnemigo1 = 198; //18 * 23
+  xEnemigo2 = 252; //18 * 14
+  yEnemigo2 = 198; //18 * 23
+  xEnemigo3 = 216; //18 * 14
+  yEnemigo3 = 414; //18 * 23
 
-  var leftVal =  parseInt(window.getComputedStyle(character).getPropertyValue("left"))
-  character.style.left = (leftVal + 30) + "px";
-
+  xFruta = 18 * 14;
+  yFruta = 18 * 17;
 }
 
-function left() {
+function setInitialPositions(){
+  pangui1.style.left = xEnemigo1 + 'px';
+  pangui1.style.top = yEnemigo1 + 'px';
+  pangui2.style.left = xEnemigo2 + 'px';
+  pangui2.style.top = yEnemigo2 + 'px';
+  pangui3.style.left = xEnemigo3 + 'px';
+  pangui3.style.top = yEnemigo3 + 'px';
 
-  var leftVal =  parseInt(window.getComputedStyle(character).getPropertyValue("left"))
-  character.style.left = (leftVal - 30) + "px";
+  divFruta.style.top = '306px';
+  divFruta.style.left = '252px';
 
+  charDiv.style.left = '234px';
+  charDiv.style.top = '414px';
+  charP2Div.style.left ='252px';
+  charP2Div.style.top = '414px';
 }
-
-
-var checkDead = setInterval(function() {
-  var characterTop = parseInt(window.getComputedStyle(character).getPropertyValue("top"));
-  var enemyLeft = parseInt(window.getComputedStyle(enemy).getPropertyValue("left"));
-
-  //console.log(characterTop);
-  //commented this out while working on css
-  /*
-    
-  if(
-      enemyLeft<30 && enemyLeft>0 && characterTop>=360
-  )
-  {
-      enemy.style.animation="none"; //remove the animation
-      enemy.style.display="none";
-      alert("Poke.....I got you there!");
-      
-  }
-    
-  
-
-}, 10);
-
-addEventListener("keyup", function(e) {
-  if (e.keyCode === 37) {
-    left()
-  }
-})
-
-addEventListener("keyup", function(e) {
-  if (e.keyCode === 38) {
-    jump()
-  }
-})
-
-addEventListener("keyup", function(e) {
-  if (e.keyCode === 39) {
-    right()
-  }
-})
-*/

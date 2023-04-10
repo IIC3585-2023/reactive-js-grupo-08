@@ -13,10 +13,6 @@
   <h1>PacXD</h1>
   <p>Puntuacion: 0</p>
 
-  <div id="restartButtonDiv">
-    <input type="image" id="resButton" src="imgs/RestartXGris.png" disabled onclick="restartGame()"/>
-  </div>
-
   <div id="game">
     
     <div id="background">
@@ -29,9 +25,21 @@
     <div id="characterP2" style="visibility: hidden;">
         <img id="img" src="imgs/baltica.jpg">
     </div>
-    <div id="startButtonDiv">
-      <input type="image" id="button" src="imgs/BotonStartAzul.png" onclick="startGame()"/>
+
+    <div id="fruit">
+      <img id="img" src="imgs/Fruit.png">
     </div>
+    
+    <div id="botones">
+      <div id="startButtonDiv">
+        <input type="image" id="button" src="imgs/BotonStartAzul.png" onclick="startGame()"/>
+      </div>
+
+      <div id="restartButtonDiv">
+        <input type="image" id="resButton" src="imgs/RestartXGris.png" disabled onclick="restartGame()"/>
+      </div>
+    </div>
+
     <div id="pangui1" class="pangui" style="visibility: hidden;">
       <img id="img" src="imgs/Pangui.png">
     </div>
@@ -41,6 +49,8 @@
     <div id="pangui3" class="pangui" style="visibility: hidden;">
       <img id="img" src="imgs/Pangui.png">
     </div>
+
+
   </div>
 
   <script src="script.js"></script>

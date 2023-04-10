@@ -51,107 +51,22 @@
     margin-top: 9px;
     margin-left: 167px;
   }
-  
-  
 
 
-/*   Lo de adelante no se utiliza  */
-
-
-
-
-
-
-
-  * {
-    padding: 0;
-    margin: 22;
+  #startButtonDiv{
+    display: inline-block;
   }
-  
 
-
-
-
-
-
-
-
-  /* new class called animate */
-  
-  .animate {
-    animation: jump 500ms;
-  }
-  
-  .right {
-    animation: right 500ms;
-  }
-  
-  #enemy {
-    width: 60px;
-    height: 60px;
-    background-color: red;
-    border-radius: 14px;
-    position: relative;
-    top: 320px;
-    left: 440px;
-    animation: moveenemy 1s infinite linear;
-  }
-  
-  @keyframes moveenemy {
-    0% {
-      left: 440px;
-    }
-    50% {
-      top: 58px;
-    }
-    100% {
-      left: 0px;
-      top: 320x;
-    }
-  }
-  
-  @keyframes jump {
-    0% {
-      top: 380px;
-    }
-    30% {
-      top: 50px;
-    }
-    50% {
-      top: 40px;
-    }
-    100% {
-      top: 380px;
-    }
-  }
-  
-  @keyframes right {
-    0% {
-      left: 0px;
-    }
-    100% {
-      left: 30px;
-    }
-  }
-  
-  
-  /* adding sky*/
-  
-  #sky {
-    width: 500px;
-    height: 340px;
-    background-color: skyblue;
+  #restartButtonDiv{
+    display: inline-block;
     position: absolute;
-    top: 118px;
+    margin-top: 27px;
+    margin-left: 9px;
   }
-  
-  
-  /* adding ground */
-  
-  #ground {
-    width: 500px;
-    height: 170px;
-    background-color: bisque;
+
+  #fruit{
+    width: 18px;
+    height: 18px;
     position: absolute;
-    top: 450px;
   }
+  
