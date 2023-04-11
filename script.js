@@ -310,18 +310,6 @@ function checkForFruit(x, y){
   return false;
 }
 
-function eatFruit(){
-  score += 200;
-  document.getElementById("score").innerHTML = score;
-  divFruta.style.visibility = 'hidden';
-  boolFruta = false;
-}
-
-function showFruit(){
-  let fruitX;
-  let fruitY;
-}//unused
-
 function checkForPill(x, y){
   if (x == 18 && y == 18 && Pill1) {
     return 1;
@@ -435,7 +423,8 @@ function setInitialPositions(){
 
 // en el setup
 var tid;
-var timerId;
+var timerPillId;
+var timerFruitId;
 var tkId;
 var invincible = false;
 //en el start
@@ -470,13 +459,45 @@ function startTimer() { // to be called when you want to start the timer
 }
 
 function powerup(){
-  clearTimeout(timerId);
+  console.log("INVENCIBLE");
+  clearTimeout(timerPillId);
   invincible = true;
-  timerId=setTimeout(endInvincibility,10000)
+  timerPillId=setTimeout(endInvincibility,10000)
+}
+
+function eatFruit(){
+  clearTimeout(timerFruitId)
+  score += 200;
+  document.getElementById("score").innerHTML = score;
+  divFruta.style.visibility = 'hidden';
+  boolFruta = false;
+  timerFruitId=setTimeout(createFruit, 2500)
 }
 
 function endInvincibility(){
+  console.log("NORMAL");
   invincible = false;
+}
+
+function createFruit(){
+  let creatingPosition = true;
+  let gridX;
+  let gridY;
+
+  while (creatingPosition) {
+    gridX = getRandomInt(28);
+    gridY = getRandomInt(31)
+
+    if (layout[gridY][gridX] == ".") {
+      creatingPosition = false;
+    }
+  }
+  xFruta = gridX * 18;
+  yFruta = gridY * 18;
+  divFruta.style.top = yFruta + 'px';
+  divFruta.style.left = xFruta + 'px';
+  divFruta.style.visibility = 'visible';
+  boolFruta = true;
 }
 
 function timeKeeper(){
@@ -495,4 +516,8 @@ function addTime(){
   else{
     document.getElementById("minutes:seconds").innerHTML = minutes+":"+seconds;
   }
+}
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
 }
