@@ -54,6 +54,9 @@ const charP2Div = document.getElementById("characterP2");
 const button = document.getElementById("button");
 const resButton = document.getElementById("resButton");
 const gameOver = document.getElementById("gameOver");
+const powerText = document.getElementById("powerText")
+
+
 const pangui1 = document.getElementById("pangui1");
 const pangui2 = document.getElementById("pangui2");
 const pangui3 = document.getElementById("pangui3");
@@ -533,6 +536,7 @@ function startTimer() { // to be called when you want to start the timer
 
 function powerup(){
   console.log("INVENCIBLE");
+  powerText.style.visibility = 'visible';
   clearTimeout(timerPillId);
   invincible = true;
   timerPillId=setTimeout(endInvincibility,10000)
@@ -549,6 +553,7 @@ function eatFruit(){
 
 function endInvincibility(){
   console.log("NORMAL");
+  powerText.style.visibility='hidden'
   invincible = false;
 }
 

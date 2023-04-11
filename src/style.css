@@ -203,3 +203,8 @@
   margin-top: 1px;
   z-index: 0;
 }
+
+#powerText{
+  margin-left: 524px;
+  visibility: hidden;
+}
