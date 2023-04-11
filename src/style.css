@@ -46,7 +46,7 @@
 #pangui4 {
   background-color: orange;
 }
-#img {
+.img {
   /*height: 40px;
   width: 40px;
   */
@@ -58,7 +58,7 @@
   border-radius: 10px;
 }
 
-#button {
+.button {
   margin-top: 9px;
   margin-left: 167px;
 }

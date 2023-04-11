@@ -7,15 +7,85 @@
     <title>Document</title>
   </head>
   <body>
-    <h1 class="text-white bg-yellow-300 p-5">PacXD</h1>
-    <p>Puntuacion: 0</p>
-    <div id="game">
+    <h1>PacXD</h1>
+    <p>Puntuacion: <span id="score"></span></p>
+    <p>Tiempo: <span id="minutes:seconds"></span></p>
+    <div id="parent">
+      <div id="game">
         <div id="background">
-          <img id="img_map">
-      </div>
-        <div id="character">
-            <img id="img_jager" >
+          <img id="imgBack" class="img" />
         </div>
+
+        <div id="character" style="visibility: hidden">
+          <img id="imgChar" class="img" />
+        </div>
+        <div id="characterP2" style="visibility: hidden">
+          <img id="imgChar2" class="img" />
+        </div>
+
+        <div id="fruit">
+          <img id="imgFruit" class="img" />
+        </div>
+
+        <div id="pill1" class="pill">
+          <img id="imgPill1" class="img" />
+        </div>
+
+        <div id="pill2" class="pill">
+          <img id="imgPill2" class="img" />
+        </div>
+
+        <div id="pill3" class="pill">
+          <img id="imgPill3" class="img" />
+        </div>
+
+        <div id="pill4" class="pill">
+          <img id="imgPill4" class="img" />
+        </div>
+
+        <div id="botones">
+          <div id="startButtonDiv">
+            <input
+              type="image"
+              id="button"
+              class="button"
+              onclick="startGame()"
+            />
+          </div>
+
+          <div id="restartButtonDiv">
+            <input
+              type="image"
+              id="resButton"
+              disabled
+              onclick="restartGame()"
+            />
+          </div>
+        </div>
+
+        <div id="pangui1" class="pangui" style="visibility: hidden">
+          <!-- Inky -->
+          <img class="img" id="imgPangui1" />
+        </div>
+        <div id="pangui2" class="pangui" style="visibility: hidden">
+          <!-- Binky -->
+          <img class="img" id="imgPangui2" />
+        </div>
+        <div id="pangui3" class="pangui" style="visibility: hidden">
+          <!-- Pinky -->
+          <img class="img" id="imgPangui3" />
+        </div>
+        <div id="pangui4" class="pangui" style="visibility: hidden">
+          <!-- Clyde-->
+          <img class="img" id="imgPangui4" />
+        </div>
+      </div>
+
+      <div id="gameOver">
+        <img class="img" id="imgGameOver" />
+      </div>
+    </div>
+
     <script src="./bundle.js"></script>
   </body>
 </html>
