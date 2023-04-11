@@ -88,3 +88,118 @@
   margin-top: 1px;
   z-index: 0;
 }
+#gameOver{
+  width: 504px;
+  margin-left: 10px;
+  margin-top: 150px;
+  position: absolute;
+  z-index: 10;
+  visibility: hidden;
+}
+#parent{
+  position: relative;
+}
+
+#game {
+  width: 504px;
+  height: 558px;
+  position: absolute;
+  margin-left: 10px;
+}
+
+#gameOver{
+  width: 504px;
+  margin-left: 10px;
+  margin-top: 150px;
+  position: absolute;
+  z-index: 10;
+  visibility: hidden;
+}
+
+
+#background{
+  z-index: -2;
+}
+
+#character {
+  width: 18px;
+  height: 18px;
+  outline: 1px solid grey;
+  background-color: yellow;
+  position: absolute;
+  border-radius: 5px;
+  /*animation: jump 300ms */
+}
+
+#characterP2 {
+  width: 18px;
+  height: 18px;
+  outline: 1px solid grey;
+  background-color: yellow;
+  position: absolute;
+  border-radius: 5px;
+  /*animation: jump 300ms */
+}
+
+.pangui{
+  width: 18px;
+  height: 18px;
+  outline: 1px solid grey;
+  background-color: red;
+  position: absolute;
+  border-radius: 5px;
+}
+
+#pangui2{
+  background-color: lightblue;
+}
+#pangui3{
+  background-color: pink;
+}
+#pangui4{
+  background-color: orange;
+}
+#img{
+  /*height: 40px;
+  width: 40px;
+  */
+  display:block;
+  margin:auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+
+#button{
+  margin-top: 9px;
+  margin-left: 167px;
+}
+
+
+#startButtonDiv{
+  display: inline-block;
+}
+
+#restartButtonDiv{
+  display: inline-block;
+  position: absolute;
+  margin-top: 27px;
+  margin-left: 9px;
+}
+
+#fruit{
+  width: 18px;
+  height: 18px;
+  position: absolute;
+}
+
+.pill{
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  margin-left: 1px;
+  margin-top: 1px;
+  z-index: 0;
+}
