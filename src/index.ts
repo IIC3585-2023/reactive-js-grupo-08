@@ -201,7 +201,7 @@ setInitialValues();
  function afterPlayerMovement(props: CoordinatesPlayer) {
    eat(props);
    panguiCords.map((cords) => {
-     if (cords[0] == props.x && cords[1] == props.y) {
+     if (cords[0] == props.x && cords[1] == props.y && !invincible) {
        console.log("PX");
        endGame();
      }
@@ -401,7 +401,6 @@ function endGame(){
   gameOver.style.visibility = "visible";
   //algo para mostrar el puntaje
 }
-
 
 
 function eatPill(pill:number) {
