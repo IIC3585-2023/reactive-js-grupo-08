@@ -5,22 +5,51 @@
   margin-left: 10px;
 }
 
+#background {
+  z-index: -2;
+}
 #character {
   width: 18px;
   height: 18px;
   outline: 1px solid grey;
   background-color: yellow;
   position: absolute;
-  top: 2 px;
   border-radius: 5px;
-  left: 2px;
   /*animation: jump 300ms */
 }
 
+#characterP2 {
+  width: 18px;
+  height: 18px;
+  outline: 1px solid grey;
+  background-color: yellow;
+  position: absolute;
+  border-radius: 5px;
+  /*animation: jump 300ms */
+}
+
+.pangui {
+  width: 18px;
+  height: 18px;
+  outline: 1px solid grey;
+  background-color: red;
+  position: absolute;
+  border-radius: 5px;
+}
+
+#pangui2 {
+  background-color: lightblue;
+}
+#pangui3 {
+  background-color: pink;
+}
+#pangui4 {
+  background-color: orange;
+}
 #img {
   /*height: 40px;
-    width: 40px;
-    */
+  width: 40px;
+  */
   display: block;
   margin: auto;
   max-width: 100%;
@@ -28,100 +57,34 @@
   object-fit: contain;
   border-radius: 10px;
 }
-#maze {
-  width: 400px;
-  height: 400px;
-  background-image: url("static/jager.jpg");
-  background-size: 100%;
+
+#button {
+  margin-top: 9px;
+  margin-left: 167px;
 }
 
-#player {
-  width: 50px;
-  height: 50px;
-  background-color: red;
+#startButtonDiv {
+  display: inline-block;
+}
+
+#restartButtonDiv {
+  display: inline-block;
   position: absolute;
-  top: 0;
-  left: 0;
-}
-* {
-  padding: 0;
-  margin: 22;
+  margin-top: 27px;
+  margin-left: 9px;
 }
 
-/* new class called animate */
-
-.animate {
-  animation: jump 500ms;
-}
-
-.right {
-  animation: right 500ms;
-}
-
-#enemy {
-  width: 60px;
-  height: 60px;
-  background-color: red;
-  border-radius: 14px;
-  position: relative;
-  top: 320px;
-  left: 440px;
-  animation: moveenemy 1s infinite linear;
-}
-
-@keyframes moveenemy {
-  0% {
-    left: 440px;
-  }
-  50% {
-    top: 58px;
-  }
-  100% {
-    left: 0px;
-    top: 320x;
-  }
-}
-
-@keyframes jump {
-  0% {
-    top: 380px;
-  }
-  30% {
-    top: 50px;
-  }
-  50% {
-    top: 40px;
-  }
-  100% {
-    top: 380px;
-  }
-}
-
-@keyframes right {
-  0% {
-    left: 0px;
-  }
-  100% {
-    left: 30px;
-  }
-}
-
-/* adding sky*/
-
-#sky {
-  width: 500px;
-  height: 340px;
-  background-color: skyblue;
+#fruit {
+  width: 18px;
+  height: 18px;
   position: absolute;
-  top: 118px;
 }
 
-/* adding ground */
-
-#ground {
-  width: 500px;
-  height: 170px;
-  background-color: bisque;
+.pill {
+  width: 16px;
+  height: 16px;
   position: absolute;
-  top: 450px;
+  margin-left: 1px;
+  margin-top: 1px;
+  z-index: 0;
 }

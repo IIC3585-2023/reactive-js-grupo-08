@@ -25,8 +25,31 @@ module.exports = {
           {
             loader: "file-loader",
             options: {
-              name: "[name].[ext]",
+              limit: 8000,
+              name: "images/[name].[ext]",
               outputPath: "assets/",
+            },
+          },
+        ],
+      },
+      {
+        test: /\.html$/,
+        use: [
+          {
+            loader: "html-loader",
+            options: {
+              sources: {
+                list: [
+                  {
+                    // Tag name
+                    tag: "img",
+                    // Attribute name
+                    attribute: "src",
+                    // Type of processing: 'src' or 'srcset'
+                    type: "src",
+                  },
+                ],
+              },
             },
           },
         ],
