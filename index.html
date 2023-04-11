@@ -12,64 +12,70 @@
 <body style="align-items: center;">
   <h1>PacXD</h1>
   <p>Puntuacion: <span id="score"></span></p>
-
-  <div id="game">
-    
-    <div id="background">
-      <img id="img" src="imgs/map.png">
-    </div>
-
-    <div id="character" style="visibility: hidden;">
-        <img id="img" src="imgs/jager.jpg">
-    </div>
-    <div id="characterP2" style="visibility: hidden;">
-        <img id="img" src="imgs/baltica.jpg">
-    </div>
-
-    <div id="fruit">
-      <img id="img" src="imgs/Fruit.png">
-    </div>
-
-    <div id="pill1" class="pill">
-      <img id="img" src="imgs/PowerPill.png">
-    </div>
-
-    <div id="pill2" class="pill">
-      <img id="img" src="imgs/PowerPill.png">
-    </div>
-
-    <div id="pill3" class="pill">
-      <img id="img" src="imgs/PowerPill.png">
-    </div>
-
-    <div id="pill4" class="pill">
-      <img id="img" src="imgs/PowerPill.png">
-    </div>
-    
-    <div id="botones">
-      <div id="startButtonDiv">
-        <input type="image" id="button" src="imgs/BotonStartAzul.png" onclick="startGame()"/>
+  <p>Tiempo: <span id="minutes:seconds"></span></p>
+  
+  <div id="parent"> 
+    <div id="game">
+      
+      <div id="background">
+        <img id="img" src="imgs/map.png">
       </div>
 
-      <div id="restartButtonDiv">
-        <input type="image" id="resButton" src="imgs/RestartXGris.png" disabled onclick="restartGame()"/>
+      <div id="character" style="visibility: hidden;">
+          <img id="img" src="imgs/jager.jpg">
       </div>
+      <div id="characterP2" style="visibility: hidden;">
+          <img id="img" src="imgs/baltica.jpg">
+      </div>
+
+      <div id="fruit">
+        <img id="img" src="imgs/Fruit.png">
+      </div>
+
+      <div id="pill1" class="pill">
+        <img id="img" src="imgs/PowerPill.png">
+      </div>
+
+      <div id="pill2" class="pill">
+        <img id="img" src="imgs/PowerPill.png">
+      </div>
+
+      <div id="pill3" class="pill">
+        <img id="img" src="imgs/PowerPill.png">
+      </div>
+
+      <div id="pill4" class="pill">
+        <img id="img" src="imgs/PowerPill.png">
+      </div>
+      
+      <div id="botones">
+        <div id="startButtonDiv">
+          <input type="image" id="button" src="imgs/BotonStartAzul.png" onclick="startGame()"/>
+        </div>
+
+        <div id="restartButtonDiv">
+          <input type="image" id="resButton" src="imgs/RestartXGris.png" disabled onclick="restartGame()"/>
+        </div>
+      </div>
+
+      <div id="pangui1" class="pangui" style="visibility: hidden;"> <!-- Inky --> 
+        <img id="img" src="imgs/Pangui.png">
+      </div>
+      <div id="pangui2" class="pangui" style="visibility: hidden;"> <!-- Binky -->
+        <img id="img" src="imgs/Pangui.png">
+      </div>
+      <div id="pangui3" class="pangui" style="visibility: hidden;"> <!-- Pinky -->
+        <img id="img" src="imgs/Pangui.png">
+      </div>
+      <div id="pangui4" class="pangui" style="visibility: hidden;"> <!-- Clyde-->
+        <img id="img" src="imgs/Pangui.png">
+      </div>
+
     </div>
 
-    <div id="pangui1" class="pangui" style="visibility: hidden;"> <!-- Inky --> 
-      <img id="img" src="imgs/Pangui.png">
+    <div id="gameOver">
+      <img id="img" src="imgs/GameOver.png">
     </div>
-    <div id="pangui2" class="pangui" style="visibility: hidden;"> <!-- Binky -->
-      <img id="img" src="imgs/Pangui.png">
-    </div>
-    <div id="pangui3" class="pangui" style="visibility: hidden;"> <!-- Pinky -->
-      <img id="img" src="imgs/Pangui.png">
-    </div>
-    <div id="pangui4" class="pangui" style="visibility: hidden;"> <!-- Clyde-->
-      <img id="img" src="imgs/Pangui.png">
-    </div>
-
-
   </div>
 
   <script src="script.js"></script>
