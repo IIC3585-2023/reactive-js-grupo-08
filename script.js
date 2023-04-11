@@ -31,6 +31,7 @@ let boolItems = [boolFruta,Pill1,Pill2,Pill3,Pill4];
 let score;
 let seconds=0;
 let minutes=0;
+
 //const keydown$ = Rx.fromEvent(document, "keydown");
 
 document.addEventListener('keydown',handleKeys);
@@ -177,6 +178,7 @@ let x2 = 252; //18 * 14
 let y2 = 414;
 
 let playerCords=[[x,y],[x2,y2]];
+
 let panguiCords=[[234,198],[252,198],[216,198], [270,198]];
 
 panguis.map((value,index)=>{
@@ -373,7 +375,6 @@ function checkCollision(px, py) {
     console.log("P2");
     endGame();
   } 
-
 }
 
 function setInitialValues(){
@@ -399,7 +400,6 @@ function setInitialValues(){
   seconds = 0;
   minutes = 0;
   document.getElementById("minutes:seconds").innerHTML = "0:00";
-
 }
 
 function setInitialPositions(){
