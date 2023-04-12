@@ -1,4 +1,5 @@
 import { fromEvent, Observable } from "rxjs";
+//import { timer } from 'rxjs';
 import { filter, map } from "rxjs/operators";
 //import $ from 'jquery';
 import mapp from "./images/map.png";
@@ -84,6 +85,25 @@ const isArrowKey = (event: KeyboardEvent) => {
     event.key
   );
 };
+let timerxd = 200;
+const isZKey = (event: KeyboardEvent)=>{return ["z"].includes(event.key)};
+const ZKeyObservable = fromEvent(document,"keydown").pipe(
+  filter((event: KeyboardEvent) => isZKey(event)),
+  map((event) => event.key.toLowerCase())
+);
+ZKeyObservable.subscribe((ZKey)=>{
+  clearInterval(tid);
+  if (timerxd==200){
+    timerxd=10;
+    console.log(`Dificultad aumentada`);
+  }
+  else {
+    timerxd=200;
+    console.log(`Dificultad disminuida`);
+  };
+  if (start){tid = setInterval(randomMov, timerxd)};
+
+})
 
 const wasdKeyObservable = fromEvent(document, "keydown").pipe(
   filter((event: KeyboardEvent) => isWASDKey(event)),
@@ -1443,6 +1463,8 @@ function startTimer() {
   tid = setInterval(randomMov, 200);
 }
 
+/* const TimerPill = timer(10000);
+const subscribe = TimerPill.subscribe(val => console.log(val)); */
 function powerup() {
   console.log("INVENCIBLE");
   powerText.style.visibility = "visible";
