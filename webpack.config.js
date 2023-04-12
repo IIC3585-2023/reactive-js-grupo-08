@@ -32,28 +32,6 @@ module.exports = {
           },
         ],
       },
-      {
-        test: /\.html$/,
-        use: [
-          {
-            loader: "html-loader",
-            options: {
-              sources: {
-                list: [
-                  {
-                    // Tag name
-                    tag: "img",
-                    // Attribute name
-                    attribute: "src",
-                    // Type of processing: 'src' or 'srcset'
-                    type: "src",
-                  },
-                ],
-              },
-            },
-          },
-        ],
-      },
     ],
   },
   resolve: {
